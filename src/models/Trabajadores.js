@@ -10,6 +10,12 @@ export class TrabajadorModel {
 		const worker =  await Trabajador.findById(id);
 		return worker
 	}
+
+	static async getByMatricula({matricula}){
+		const worker =  await Trabajador.findOne({matricula: matricula});
+		return worker
+	}
+
 	static async findEmail({correo}){
 		const worker = await Trabajador.findOne({email: correo})
 		return worker

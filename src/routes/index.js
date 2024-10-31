@@ -4,10 +4,13 @@ import { AreaController } from "../controllers/Areas.js";
 
 const router = Router();
 
-router.get('/api/trabajadores', TrabajadorController.getAll)
-router.get('/api/trabajadores/:id', TrabajadorController.getById)
-router.get('/api/areas', AreaController.getAll)
-router.get('/api/areas/:id', AreaController.getById)
+router.get('/api/trabajadores', TrabajadorController.getAll);
+router.get('/api/trabajadores/:id', TrabajadorController.getById);
+
+router.get('/api/trabajadores/matricula/:matricula', TrabajadorController.getByMatricula);
+
+router.get('/api/areas', AreaController.getAll);
+router.get('/api/areas/:id', AreaController.getById);
 
 router.post('/api/trabajadores/nuevo-trabajador', TrabajadorController.create );
 router.post('/api/areas/nueva-area', AreaController.create);

@@ -14,6 +14,13 @@ export class TrabajadorController {
 		res.status(404).json({ message: 'Trabajador not found'})
 	}
 
+	static async getByMatricula(req, res){
+		const worker = req.params.matricula
+		const trabajador = await TrabajadorModel.getByMatricula({matricula: worker })
+		if(trabajador) return res.json(trabajador)
+		res.status(404).json({ message: 'Trabajador not found'})
+	}
+
 	static async create (req, res){
 		const { nombre, apellidoPaterno, apellidoMaterno, telefono, nacimiento, email, matricula, area} =  req.body
 		const workerExist = await TrabajadorModel.findEmail({correo: email});
