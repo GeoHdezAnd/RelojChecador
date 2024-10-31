@@ -1,0 +1,274 @@
+/* Reset básico */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+    font-family: 'FuentePrincipal';
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+p {
+    margin: 0;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+
+}
+
+input:focus, textarea:focus, select:focus {
+border-color: #fff;
+}
+
+
+/* Variables de color */
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #6C757D;
+    --background-color: #F8F9FA;
+    --text-color: #333;
+}
+
+@font-face {
+    font-family: 'FuentePrincipal'; /* Nombre de la fuente */
+    src: url('../assets/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;    /* Peso de la fuente */
+    font-style: normal;     /* Estilo de la fuente */
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.987); /* Fondo semitransparente */
+}
+
+/* FORMULARIOS */
+.parametro-contenedor{
+    border: 1px solid #fff;
+    padding: 4px .5rem;
+    border-radius: 2rem;
+    transition: box-shadow 0.5s ease;
+}
+
+.parametro-contenedor:hover{
+    -webkit-box-shadow: -7px -4px 19px -7px rgba(255,255,255,1);
+    -moz-box-shadow: -7px -4px 19px -7px rgba(255,255,255,1);
+    box-shadow: -7px -4px 19px -7px rgba(255,255,255,1);
+}
+.parametro-contenedor label{
+    padding-left: .7rem;
+    font-size: 12px;
+}
+.parametro-contenedor input{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 7px;
+}
+
+.parametro-contenedor select{
+    background-color: #212529;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 7px;
+}
+.parametro-contenedor option{
+    background-color: #212529;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 0 7px;
+    font-family: inherit;
+}
+
+/* botones */
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    padding-top: 1rem;
+    font-weight: bold;
+}
+.limpiar{
+    background-color: rgba(255, 0, 0, 0.103);
+    border: 1px solid rgba(161, 50, 50, 0.529);
+    transition: box-shadow 0.5s ease, background-color 0.5s ease;
+}
+.limpiar:hover{
+    background-color: rgba(255, 0, 0, 0.331);
+    border: 1px solid red;
+}
+
+.crear{
+    background-color: transparent;
+    border: 1px solid #ffff;
+    transition: background-color 0.5s ease;
+}
+.crear:hover{
+    background-color: #ffffff3f;
+}
+
+
+.error{
+    position: relative;
+    text-align: center;
+    color: #fff;
+    border: 1px solid red;
+    margin: 1rem 0;
+    background-color: #78000053;
+    font-size: 1rem;
+}
+
+.opacidad-50{
+    opacity: 50%;
+    cursor: none;
+}
+
+/* Estilos para el modal (fondo semi-transparente) */
+.modal-confirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que el modal esté por encima del contenido */
+}
+
+/* Estilos para el contenido del modal */
+.modal-content {
+    background-color: white;
+    color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 400px; /* Puedes ajustar el tamaño */
+    min-height: 200px; /* Altura mínima */
+    display: grid;
+    gap: 1rem;
+}
+
+.confirmar-button {
+    background-color: red;
+}
+
+.btneliminar-area p{
+    color: white;
+}
+
+.oculto{
+    display: none;
+}
+.boton-usuario.active {
+    background-color: #323232; /* Cambia el color de fondo cuando está activo */
+    color: white; /* Cambia el color del texto */
+}
+
+.reloj-modal{
+    width: 60vw; /* 50% del ancho del viewport (ventana) */
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Centrando respecto al contenedor */
+    transition: transform .3s ease; /* Transición para el efecto de salto */
+    position: absolute;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #323232;
+    color: white;
+    border-color: #323232;
+
+}
+
+.contenido-reloj{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.contenido-reloj .menu{
+    align-items: center;
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+.contenido-reloj .menu span{
+    font-size: 1.8rem;
+    padding: 0 2rem;
+}
+
+.contenido-reloj .logo{
+    margin: auto;
+}
+
+.formulario{
+    display: grid;
+    justify-content: center;
+}
+.menu .parametro-contenedor {
+    display: flex;
+    justify-content: center;
+    
+}
+.menu .formulario input{
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.botones .entrada {
+    background-color: green;
+}
+.botones .entrada:hover {
+    background-color: rgb(8, 83, 8);
+}
+.botones .salida {
+    background-color: red;
+}
+.botones .salida:hover {
+    background-color: rgb(138, 7, 7);
+}

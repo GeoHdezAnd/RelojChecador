@@ -1,0 +1,122 @@
+/* ===== EFECTO TRANSICIONES */
+@view-transition{
+    navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root){
+    animation-duration: .05s;
+}
+
+
+::view-transition-old(registro){
+    animation-name: scaleOut;
+}
+
+::view-transition-new(registro){
+    animation-name: scaleIn;
+}
+
+
+@keyframes scaleIn {
+    from{
+        transform: scale(0);
+        opacity: .5;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+@keyframes scaleOut {
+    from{
+        transform: scale(1);
+        opacity: 1;
+    }
+    to{
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+body{
+    background-color: #212529;
+    color: #ffff;
+    overflow: hidden;
+    position: relative;
+}
+
+.contenedor-registro{
+    width: 100vw;  /* 100% del ancho de la pantalla */
+    height: 100vh; /* 100% del alto de la pantalla */
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    view-transition-name: registro;
+}
+.registrar-contenedor{
+    flex-grow: 2;
+    position: relative;    /* El padre debe tener una posición relativa para que los hijos se ajusten a él */
+    height: 100vh;
+}
+.registrar{
+    position: absolute; /* Ajustamos los hijos al padre*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Centra horizontal y verticalmente */
+    width: 30rem;
+    height: 28rem;
+    border: 1px  solid #868686;
+    border-radius: 2rem;
+    padding: 2rem;
+    -webkit-box-shadow: -7px -5px 43px -13px rgba(240,240,240,1);
+    -moz-box-shadow: -7px -5px 43px -13px rgba(240,240,240,1);
+    box-shadow: -7px -5px 43px -13px rgba(240,240,240,1);
+
+    display: grid;
+}
+.registrar p {
+    padding: .5rem 0;
+}
+.registrar a {
+    font-weight: bold;
+}
+.registrar a:hover {
+    font-weight: bold;
+    color: #868686;
+}
+
+.formulario{
+    display: grid;
+    gap: 1rem;
+}
+
+.nombre-contenedor{
+    display: flex;
+    gap: .5rem;
+}
+
+
+
+.contenedor-imagen{
+    position: relative; /* Necesario para el posicionamiento absoluto del overlay */
+}
+.fade-image{
+    height: 100%;
+}
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.contenedor-imagen .izquierda{
+    background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #212529 70%); /* Gradiente de izquierda a derecha */
+}
+
+.contenedor-imagen .derecha{
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #212529 70%); /* Gradiente de izquierda a derecha */
+}
+

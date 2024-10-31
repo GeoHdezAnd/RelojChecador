@@ -1,0 +1,139 @@
+.botones-contenedor{
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    font-weight: 800;
+}
+
+.search-box{
+    margin: 0 2rem;
+    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.search-box input{
+    background-color: transparent;
+    height: 3rem;
+    color: #fff;
+}
+
+
+
+/* MODAL*/
+
+.modal {
+    width: 60vw; /* 50% del ancho del viewport (ventana) */
+    height: 70vh; /* 50% de la altura del viewport */
+    border: none;
+    border-radius: 10px;
+    background-color: #212529;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: absolute; /* Posicionarlo dentro del contenedor */
+    /* Las siguientes propiedades ajustan el modal al centro */
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Centrando respecto al contenedor */
+    transition: transform .3s ease; /* Transición para el efecto de salto */
+}
+.mostrar {
+    transform: translate(-50%, -50%) scale(1); /* Escalar a tamaño normal */
+}
+/* Clase para el retroceso */
+.retroceder {
+    transform: translate(-50%, -50%) scale(0); /* Escalar a 0 para el efecto de retroceso */
+}
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.55); /* Fondo semitransparente */
+}
+
+.modal-seccion1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+.modal-seccion1 img{
+    width: 30px;
+    margin-top: -1rem;
+    margin-right: -1rem;
+    padding: 0 auto;
+}
+.modal-seccion1 img:hover{
+    cursor: pointer;
+    filter: drop-shadow(
+        3px 0 5px rgba(207, 18, 18, 0.8)
+    );
+}
+
+.modal-formulario {
+    margin: 0 2rem;
+}
+
+.modal-formulario form{
+    display: grid;
+    gap: 1rem;
+}
+
+.formulario-1secc{
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;;
+}
+
+.formulario-1secc img{
+    max-width: 15rem;
+    height: auto;
+}
+
+.formulario-1secc .apellidos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.modal-area{
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.area-form{
+    background-color: #212529;
+    margin: 10% auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 80%;
+    max-width: 50rem;
+    box-shadow: 0 5px 15px rgba(113, 113, 113, 0.741); /* Sombra suave */
+    position: relative; /* Para colocar el botón de cerrar */
+    
+}
+
+.area-form .close{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    color: red;
+}
+
+.area-form form{
+    margin: 1rem 0;
+    padding: 1rem;
+    align-items: center;
+}
+.area-form input {
+    background-color: #212529;
+    color: white;
+    margin: .5rem 0;
+}
