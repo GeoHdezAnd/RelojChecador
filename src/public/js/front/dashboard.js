@@ -80,6 +80,16 @@ btnSalida.addEventListener('click', () =>{
 	agregarSalida();
 })
 
+function resetAsistencia(){
+	return {
+        usuario: '',
+        area: '',
+        fecha: new Date().toISOString().split('T')[0],
+        horaEntrada: '',
+        horaSalida: ''
+    };
+}
+
 async function validarMatricula(e){
 	const matricula = e.target.value;
 	try {
@@ -124,6 +134,7 @@ async function agregarEntrada(){
 		}
 		alert(`${data.message}`);
 		form.reset();
+		asistencia = resetAsistencia();
 	} catch(error){
 		console.log('No se cargaron datos')
 	}
@@ -132,6 +143,21 @@ async function agregarEntrada(){
 async function agregarSalida(){
 	const horaSalida = generarHora();
 	asistencia.horaSalida = horaSalida;
+	try {
+		const response = await fetch (`/api/asistencias/${asistencia.usuario}`,{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ horaSalida })
+		}) 
+		const data =  await response.json();
+		if(!response.ok){
+			return alert(`${data.message}`)
+		}
+		return alert(`${data.message}, ${data.asistencia}`)
 
-	console.log(asistencia);
+	} catch(error){
+		alert('Error: ', error.message)
+	}
 }

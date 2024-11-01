@@ -9,6 +9,7 @@ const asistenciaSchema = new Schema({
 	},
 	fecha: { type: Date, required: true },
 	horaEntrada: { type: String, required: true },
+	horaSalida: { type: String, default: '--:--' },
 	estado: { type: String, default: "Pendiente" }
 },{
 	timestamps: true,  // Crea automáticamente los campos createdAt y updatedAt

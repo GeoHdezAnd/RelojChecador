@@ -12,7 +12,7 @@ export class AsistenciaController{
 			const asistenciaIncompleta = await Asistencia.findOne({
 				idUsuario: usuario,
 				fecha: fechaAsistencia,
-				horaSalida: null
+				horaSalida: '--:--'
 			});
 
 			if(asistenciaIncompleta){
@@ -47,6 +47,37 @@ export class AsistenciaController{
 			res.status(500).json({ message: 'Error al ingresar datos', error: error.message });
 		}
 	}
+	static async salidaRegistro(req, res){
+		try{
+			const idUsuario = req.params.id
+			const {horaSalida} = req.body
+
+			const asistenciaIncompleta = await Asistencia.findOne({
+				idUsuario,
+				horaSalida : "--:--"
+			}).sort({ createdAt: -1});
+
+			if(!asistenciaIncompleta) {
+				return res.status(400).json({
+					message : 'No tienes asistencias abiertas.'
+				})
+			}
+
+			
+
+			const asistenciaUpdate = await AsistenciaModel.updateSalida(
+				{_id: asistenciaIncompleta._id, 
+				horaSalida});
+			res.json({
+				message: 'Salida agregada',
+				asistencia: asistenciaUpdate.horaSalida
+			})
+		} catch (error){
+			res.status(500).json({
+				message: error
+			})
+		}
+	}
 
 	static determinarEstado(entrada, horaEntrada){
 		// Descomponemos la hora para conocer la cantidad exacta del tiempo de cada hora
@@ -64,4 +95,6 @@ export class AsistenciaController{
 		}
 		return estado;
 	}
+
+	
 }

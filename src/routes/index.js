@@ -18,6 +18,7 @@ router.post('/api/asistencias/nueva-asistencia', AsistenciaController.create);
 
 router.put('/api/trabajadores/:id', TrabajadorController.update);
 router.put('/api/areas/:id', AreaController.update);
+router.put('/api/asistencias/:id', AsistenciaController.salidaRegistro);
 
 router.delete('/api/trabajadores/delete/:id', TrabajadorController.delete);
 router.delete('/api/areas/delete/:id', AreaController.delete);
