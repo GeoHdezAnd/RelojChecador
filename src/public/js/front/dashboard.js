@@ -4,6 +4,7 @@ const cerrarReloj =  document.querySelector('#cerrar-reloj');
 const horaContent = document.querySelector('#horaActual');
 const fechaContent = document.querySelector('#fechaActual');
 const btnEntrada = document.querySelector('#entradaJornada');
+const btnSalida = document.querySelector('#salidaJornada');
 const form = document.querySelector('#formulario');
 const matricula =  document.querySelector('#matricula');
 
@@ -11,7 +12,8 @@ const asistencia = {
 	usuario: '',
 	area: '',
 	fecha: new Date().toISOString().split('T')[0],
-	horaEntrada: ''
+	horaEntrada: '',
+	horaSalida: ''
 }
 
 form.addEventListener('submit', (e) =>{
@@ -74,6 +76,10 @@ btnEntrada.addEventListener('click', (e) =>{
 	
 })
 
+btnSalida.addEventListener('click', () =>{
+	agregarSalida();
+})
+
 async function validarMatricula(e){
 	const matricula = e.target.value;
 	try {
@@ -90,13 +96,18 @@ async function validarMatricula(e){
 	}
 }
 
-async function agregarEntrada(){
+function generarHora(){
 	const fecha = new Date();
 	const hour = fecha.getHours();
 	let minutes = fecha.getMinutes();
 	minutes = minutes < 10 ? '0' + minutes : minutes
 
 	const horaAsistencia = `${hour}:${minutes}`;
+	return horaAsistencia;
+}
+
+async function agregarEntrada(){
+	const horaAsistencia = generarHora();
 	asistencia.horaEntrada = horaAsistencia;
 	try{
 		const response = await fetch('/api/asistencias/nueva-asistencia', {
@@ -116,4 +127,11 @@ async function agregarEntrada(){
 	} catch(error){
 		console.log('No se cargaron datos')
 	}
+}
+
+async function agregarSalida(){
+	const horaSalida = generarHora();
+	asistencia.horaSalida = horaSalida;
+
+	console.log(asistencia);
 }
