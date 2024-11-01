@@ -19,6 +19,9 @@ const asistencia = {
 form.addEventListener('submit', (e) =>{
 	e.preventDefault();
 })
+document.addEventListener('DOMContentLoaded', ()=>{
+	cargarAsistencias();
+})
 
 btnReloj.addEventListener('click', () =>{
 	relojChecador.showModal();
@@ -79,6 +82,40 @@ btnEntrada.addEventListener('click', (e) =>{
 btnSalida.addEventListener('click', () =>{
 	agregarSalida();
 })
+
+async function cargarAsistencias(){
+	try {
+		const response = await fetch('/api/asistencias');
+		if(!response.ok){
+			return console.log('No se obtuvieron los datos')
+		} 
+		const asistencias = await response.json();
+		console.log(asistencias)
+		showData(asistencias);
+	} catch(error){
+		console.log(error)
+	}
+}
+
+function showData(data){
+	let contador = 1;
+	
+	data.forEach(asistencia =>{
+		const asistenciaContainer = document.querySelector('#contenido-asistencias');
+		const asistenciaData = document.createElement('TR');
+		asistenciaData.innerHTML = `
+			<th>${contador++}</th>
+			<th>${asistencia.idUsuario.nombre} ${asistencia.idUsuario.apellidoPaterno}</th>
+			<th>${asistencia.idUsuario.matricula}</th>
+			<th>${asistencia.idUsuario.area}</th>
+			<th>${asistencia.idUsuario.telefono}</th>
+			<th>${asistencia.estado}</th>
+			<th>${asistencia.horaEntrada}</th>
+			<th>${asistencia.horaSalida}</th>
+		`;
+		asistenciaContainer.appendChild(asistenciaData)
+	})
+}
 
 function resetAsistencia(){
 	return {

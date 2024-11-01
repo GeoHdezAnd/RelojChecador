@@ -3,6 +3,14 @@ import { AsistenciaModel } from "../models/Asistencias.js";
 import Asistencia from "../schemas/Asistencias.js";
 export class AsistenciaController{
 
+	static async getAll(req, res){
+		try {
+			const asistencias = await AsistenciaModel.getAll();
+			res.json(asistencias)
+		} catch(error){
+			res.status(500).json({ message: 'Error al ingresar datos', error: error.message });
+		}
+	}
 	static async create(req, res){
 		try {
 			const { usuario, area, fecha, horaEntrada } = req.body;
@@ -43,7 +51,6 @@ export class AsistenciaController{
 			});
 	
 		} catch (error) {
-			console.error(error);
 			res.status(500).json({ message: 'Error al ingresar datos', error: error.message });
 		}
 	}
@@ -62,8 +69,6 @@ export class AsistenciaController{
 					message : 'No tienes asistencias abiertas.'
 				})
 			}
-
-			
 
 			const asistenciaUpdate = await AsistenciaModel.updateSalida(
 				{_id: asistenciaIncompleta._id, 

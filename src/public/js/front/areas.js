@@ -198,7 +198,6 @@ async function cargarAreas(){
 			console.log('No se pudieron obtener los datos')
 		}
 		const areas = await response.json();
-		console.log(areas);
 		showData(areas);
 	} catch(error){
 		console.log(`${error.message}`);

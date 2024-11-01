@@ -1,6 +1,11 @@
 import Asistencia from "../schemas/Asistencias.js";
 
 export class AsistenciaModel{
+	static async getAll(){
+		const asistencias = await Asistencia.find().populate('idUsuario');
+		return asistencias
+	}
+	
 	static async create({idUsuario, fecha, horaEntrada, estado}){
 		const asistenciaNueva = Asistencia ({
 			idUsuario,

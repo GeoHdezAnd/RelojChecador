@@ -10,6 +10,7 @@ router.get('/api/trabajadores/:id', TrabajadorController.getById);
 router.get('/api/trabajadores/matricula/:matricula', TrabajadorController.getByMatricula);
 router.get('/api/areas', AreaController.getAll);
 router.get('/api/areas/:id', AreaController.getById);
+router.get('/api/asistencias', AsistenciaController.getAll);
 
 
 router.post('/api/trabajadores/nuevo-trabajador', TrabajadorController.create );
