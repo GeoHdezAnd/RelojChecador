@@ -9,9 +9,9 @@ const matricula =  document.querySelector('#matricula');
 
 const asistencia = {
 	usuario: '',
+	area: '',
 	fecha: new Date().toISOString().split('T')[0],
-	horaEntrada: '',
-	horaSalida: null
+	horaEntrada: ''
 }
 
 form.addEventListener('submit', (e) =>{
@@ -67,11 +67,11 @@ matricula.addEventListener('blur', (e) =>{
 		return alert('Ingresa una matricula')
 	}
 	validarMatricula(e);
-	console.log(asistencia);
 })
 
 btnEntrada.addEventListener('click', (e) =>{
 	agregarEntrada();
+	
 })
 
 async function validarMatricula(e){
@@ -84,12 +84,13 @@ async function validarMatricula(e){
         const worker = await response.json();
         alert(`Trabajador encontrado: ${worker.nombre}`);
 		asistencia.usuario = worker._id;
+		asistencia.area = worker.area;
 	} catch (error){
 		alert(error.message)
 	}
 }
 
-function agregarEntrada(){
+async function agregarEntrada(){
 	const fecha = new Date();
 	const hour = fecha.getHours();
 	let minutes = fecha.getMinutes();
@@ -97,4 +98,22 @@ function agregarEntrada(){
 
 	const horaAsistencia = `${hour}:${minutes}`;
 	asistencia.horaEntrada = horaAsistencia;
+	try{
+		const response = await fetch('/api/asistencias/nueva-asistencia', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(asistencia)
+		});
+
+		const data = await response.json();
+		if(!response.ok){
+			return  alert(`${data.message}`)
+		}
+		alert(`${data.message}`);
+		form.reset();
+	} catch(error){
+		console.log('No se cargaron datos')
+	}
 }
