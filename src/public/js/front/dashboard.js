@@ -19,8 +19,42 @@ const asistencia = {
 form.addEventListener('submit', (e) =>{
 	e.preventDefault();
 })
-document.addEventListener('DOMContentLoaded', ()=>{
-	cargarAsistencias();
+
+async function checkAuthentication() {
+    const token = localStorage.getItem('token');
+    console.log('Token obtenido:', token); // Log para verificar el token
+    const authResponse = await fetch('/dashboard', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    console.log('Response Status:', authResponse.status); // Log para verificar el estado de la respuesta
+    return authResponse.ok; // Devuelve true si la respuesta es 2xx
+}
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+	
+    try {
+        // Verifica la autenticación antes de cargar la vista
+        const isAuthenticated = await checkAuthentication();
+        if (!isAuthenticated) {
+            window.location.href = '/login'; // Redirige si no está autenticado
+            return;
+        }
+
+
+		const [asistencias, areas] = await Promise.all([cargarAsistencias(), cargarAreas()]);
+		if(asistencias && areas){
+			showData(asistencias, areas)
+		} else{
+			console.log('no se obtuvieron los datos')
+		}
+	} catch(error){
+		console.log(error);
+	}
 })
 
 btnReloj.addEventListener('click', () =>{
@@ -90,24 +124,43 @@ async function cargarAsistencias(){
 			return console.log('No se obtuvieron los datos')
 		} 
 		const asistencias = await response.json();
-		console.log(asistencias)
-		showData(asistencias);
+		return asistencias
+
 	} catch(error){
 		console.log(error)
 	}
 }
+// Cargar áreas
+async function cargarAreas() {
+	try {
+		const response = await fetch('/api/areas');
+		if (!response.ok) {
+			console.log('No se pudieron obtener los datos de áreas');
+			return [];
+		}
 
-function showData(data){
+		const areas = await response.json();
+		return areas;
+	} catch (error) {
+		console.log('Error al cargar las áreas: ', error.message);
+		return [];
+	}
+}
+
+
+function showData(data, areas){
 	let contador = 1;
 	
 	data.forEach(asistencia =>{
 		const asistenciaContainer = document.querySelector('#contenido-asistencias');
+		const area = areas.find(area => area._id === asistencia.idUsuario.area);
+		const areaNombre = area ? area.nombre : 'Área desconocida';
 		const asistenciaData = document.createElement('TR');
 		asistenciaData.innerHTML = `
 			<th>${contador++}</th>
 			<th>${asistencia.idUsuario.nombre} ${asistencia.idUsuario.apellidoPaterno}</th>
 			<th>${asistencia.idUsuario.matricula}</th>
-			<th>${asistencia.idUsuario.area}</th>
+			<th>${areaNombre}</th>
 			<th>${asistencia.idUsuario.telefono}</th>
 			<th>${asistencia.estado}</th>
 			<th>${asistencia.horaEntrada}</th>

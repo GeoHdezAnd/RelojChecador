@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authenticateToken } from "../middlewares/authenticateToken.js";
 
 const router = Router();
 
@@ -10,19 +11,19 @@ router.get('/registro', (req, res) =>{
 	res.render('register', {layout: 'login'});
 });
 
-router.get('/dashboard', (req, res) =>{
+router.get('/dashboard', authenticateToken, (req, res) =>{
 	res.render('dashboard')
 })
 
-router.get('/trabajadores', (req, res) =>{
+router.get('/trabajadores', authenticateToken, (req, res) =>{
 	res.render('trabajadores') 
 })
 
-router.get('/asistencias', (req, res) =>{
+router.get('/asistencias', authenticateToken, (req, res) =>{
 	res.render('asistencias') 
 })
 
-router.get('/configuracion', (req, res) =>{
+router.get('/configuracion', authenticateToken, (req, res) =>{
 	res.render('configuracion') 
 })
 

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { TrabajadorController } from "../controllers/Trabajadores.js";
 import { AreaController } from "../controllers/Areas.js";
 import { AsistenciaController } from "../controllers/Asistencias.js";
+import { AdminController } from "../controllers/Admin.js";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.get('/api/asistencias', AsistenciaController.getAll);
 router.post('/api/trabajadores/nuevo-trabajador', TrabajadorController.create );
 router.post('/api/areas/nueva-area', AreaController.create);
 router.post('/api/asistencias/nueva-asistencia', AsistenciaController.create);
+router.post('/api/administradores', AdminController.log)
 
 router.put('/api/trabajadores/:id', TrabajadorController.update);
 router.put('/api/areas/:id', AreaController.update);

@@ -6,22 +6,24 @@
 	<div class="registrar">
 		<span>Asistencias</span>
 		<h1>Iniciar Sesión</h1>
-		<p>¿No tienes cuenta? <a class="nav-link" href="/registro">Crear una</a></p>
-		<form action="/login" class="formulario">
+		<p id="form">¿No tienes cuenta? <a class="nav-link" href="/registro">Crear una</a></p>
+		<form class="formulario" >
 			<div class="parametro-contenedor">
 				<label for="">Email</label>
-				<input type="text" placeholder="email">
+				<input type="text" placeholder="email" id="email" name="correo">
 			</div>
 			<div class="parametro-contenedor">
 				<label for="">Contraseña</label>
-				<input type="text" placeholder="contraseña">
+				<input type="password" placeholder="contraseña" id="password" name="contraseña">
 			</div>
 
 			<p>¿Olvidaste contraseña? <a href="/recuperar">Recuperar</a></p>
 
 			<div class="botones">
-				<button type="submit" class="crear"><a href="/dashboard">Iniciar Sesión</a></button>
+				<button id="login" class="crear">Iniciar Sesión</button>
 			</div>
 		</form>
 	</div>
 </main>
+
+<script type="module" src="/js/back/login.js"></script>
