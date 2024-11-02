@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticateToken } from "../middlewares/authenticateToken.js";
+import { authenticateSession } from "../middlewares/authenticateSesion.js";
 
 const router = Router();
 
@@ -11,19 +11,19 @@ router.get('/registro', (req, res) =>{
 	res.render('register', {layout: 'login'});
 });
 
-router.get('/dashboard', authenticateToken, (req, res) =>{
+router.get('/dashboard', authenticateSession, (req, res) =>{
 	res.render('dashboard')
 })
 
-router.get('/trabajadores', authenticateToken, (req, res) =>{
+router.get('/trabajadores', authenticateSession, (req, res) =>{
 	res.render('trabajadores') 
 })
 
-router.get('/asistencias', authenticateToken, (req, res) =>{
+router.get('/asistencias', authenticateSession, (req, res) =>{
 	res.render('asistencias') 
 })
 
-router.get('/configuracion', authenticateToken, (req, res) =>{
+router.get('/configuracion', authenticateSession, (req, res) =>{
 	res.render('configuracion') 
 })
 

@@ -55,9 +55,6 @@ async function enviarDatos(data) {
 			ValidacionesForm.mostrarAlerta(`${errorData.message}`, form);
 		} else {
 			ValidacionesForm.limpiarAlerta(form);
-			const responseData = await response.json(); //
-			localStorage.setItem('token', responseData.token); 
-			console.log(localStorage.getItem('token'))
 			window.location.href = '/dashboard';
 		}
 	} catch (error) {

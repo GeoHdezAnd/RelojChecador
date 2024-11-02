@@ -1,8 +1,5 @@
 import Admin from "../schemas/Admin.js";
 import  bcrypt  from "bcrypt";
-import jwt from 'jsonwebtoken';
-
-const SECRET_KEY = 'MIBFMV';
 
 export class AdminController {
 	static async log(req, res){
@@ -17,12 +14,10 @@ export class AdminController {
 			return res.status(400).json({message: 'La contraseña no coincide'})
 		}
 
-		const token = jwt.sign({id: admin._id}, SECRET_KEY, { expiresIn: '1h'});
-		console.log('TOken: ', token);
+		req.session.userId = admin._id;  // o cualquier identificador único del usuario
 		res.json({
 			success: true, 
 			message: 'Inicio exitoso',
-			token
 		})
 	}
 }
