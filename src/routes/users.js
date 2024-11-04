@@ -7,9 +7,6 @@ router.get('/login', (req, res) =>{
 	res.render('index', {layout: 'login'});
 });
 
-router.get('/registro', (req, res) =>{
-	res.render('register', {layout: 'login'});
-});
 
 router.get('/dashboard', authenticateSession, (req, res) =>{
 	res.render('dashboard')
@@ -17,10 +14,6 @@ router.get('/dashboard', authenticateSession, (req, res) =>{
 
 router.get('/trabajadores', authenticateSession, (req, res) =>{
 	res.render('trabajadores') 
-})
-
-router.get('/asistencias', authenticateSession, (req, res) =>{
-	res.render('asistencias') 
 })
 
 router.get('/configuracion', authenticateSession, (req, res) =>{
